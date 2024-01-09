@@ -12,7 +12,7 @@ exports.postCategory=async(req,res)=>{
     })
     category=await category.save()
     if(!category){
-        return res.status(400).json({error:'Somthings went wrong'}) // bad request 
+        return res.status(400).json({error:'Somethings went wrong'}) // bad request 
     }
     res.send(category)
 }
@@ -21,7 +21,7 @@ exports.postCategory=async(req,res)=>{
 exports.categoryList=async(req,res)=>{
     const category = await Category.find()
     if(!category){
-        return res.status(400).json({error:'Somthings went wrong'})
+        return res.status(400).json({error:'Somethings went wrong'})
     }
     res.send(category)
 }
@@ -30,8 +30,22 @@ exports.categoryList=async(req,res)=>{
 exports.categoryDetails=async(req,res)=>{
     const category= await Category.findById(req.params.id)
     if(!category){
-        return res.status(400).json({error:'Somthings went wrong'})
+        return res.status(400).json({error:'Somethings went wrong'})
     }
     res.send(category)    
 }
 
+// to update category 
+exports.updateCategory=async(req,res)=>{
+    const category = await Category.findByIdAndUpdate(
+        req.params.id,
+        {
+            category_name:req.body.category_name
+        },
+        {new:true}
+    )
+    if(!category){
+        return res.status(400).json({error:'Somethings went wrong'})
+    }
+    res.send(category)  
+}
