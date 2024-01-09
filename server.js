@@ -3,6 +3,7 @@ const app=express()
 require('dotenv').config()
 const morgan=require('morgan')
 require('./db/connection')
+const bodyParser=require('body-parser')
 
 const catrgoryRoute=require('./routes/categoryRoute')
 
@@ -12,6 +13,7 @@ const catrgoryRoute=require('./routes/categoryRoute')
 
 // middlewere
 app.use(morgan('dev'))
+app.use(bodyParser.json()) // to read the json data
 
 // route
 app.use('/api',catrgoryRoute)
